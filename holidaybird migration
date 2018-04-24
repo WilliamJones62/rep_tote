@@ -1,0 +1,1 @@
+rails g model Holidaybird channel:string sku:string description:string shipped:integer ordered:integer forecast:integer harvest:integer datetime:datetime cc:string adjustment:integer uom:string

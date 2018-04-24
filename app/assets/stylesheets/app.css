@@ -1,0 +1,54 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+th{
+  text-align: left;
+  background-color: black;
+  color: white;
+}
+
+tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+.primary-logo {
+  margin: 0;
+  width: 6.6em;
+  height: 3.7em;
+  float: left;
+  position: relative;
+  background: url("/assets/DArtagnan_Logo_2015_CMYK_mini.jpg");
+}
+
+.title {
+  text-align: center;
+  float: left;
+  margin-left: 4em;
+}
+
+tr#green {
+  background-color: rgb(102,255,102);
+}
+
+tr#yellow {
+  background-color: rgb(255,255,102);
+}
+
+tr#red {
+  background-color: rgb(255,153,153);
+}
+
+td#blue {
+  background-color: rgb(51,153,255);
+}
+
+td#orange {
+  background-color: orange;
+}

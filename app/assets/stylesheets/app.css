@@ -15,7 +15,7 @@ th{
 }
 
 tr:nth-child(even){
-  background-color: #f2f2f2;
+  background-color: #d9d9d9;
 }
 
 .primary-logo {
@@ -33,22 +33,66 @@ tr:nth-child(even){
   margin-left: 4em;
 }
 
-tr#green {
-  background-color: rgb(102,255,102);
-}
-
-tr#yellow {
-  background-color: rgb(255,255,102);
-}
-
 tr#red {
   background-color: rgb(255,153,153);
 }
 
-td#blue {
-  background-color: rgb(51,153,255);
+a:link, a:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
-td#orange {
-  background-color: orange;
+a:hover, a:active {
+    background-color: black;
+    color: white;
+    box-shadow: 5px 10px 8px #888888;
+}
+
+#navbar span {
+  float: left;
+  margin-right: 4px;
+}
+
+
+.dropbtn {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  border-radius: 4px;
+  text-align: center;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  float: left;
+  display: inline-block;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 60px;
+    z-index: 1;
+}
+
+.dropdown-content span {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+/* .dropdown-content span:hover {background-color: rgb(255,255,102)} */
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }

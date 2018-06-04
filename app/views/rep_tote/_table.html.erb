@@ -11,38 +11,27 @@
 
   <tbody>
   <% @main.each do |main| %>
-    <% sold = (main.shipped + main.ordered) * 100 %>
+  <% sold = (main.shipped + main.ordered - main.adjustment)%>
 
-    <% if !main.harvest || @forecast_value %>
-      <% if main.forecast == 0 %>
-        <% percent = 100 %>
-      <% else %>
-        <% percent = sold/main.forecast %>
-      <% end %>
+  <% if !main.harvest || @forecast_value %>
+    <% to_sell = main.forecast - sold %>
+    <% if to_sell <= 0 %></td>
+      <tr id="red">
     <% else %>
-      <% if main.harvest == 0 %>
-        <% percent = 100 %>
-      <% else %>
-        <% percent = sold/main.harvest %>
-      <% end %>
+      <tr>
     <% end %>
-    <% if percent < 50 %>
-      <tr id="green">
+  <% else %>
+    <% to_sell = main.harvest - sold %>
+    <% if to_sell <= 0 %></td>
+      <tr id="red">
     <% else %>
-      <% if percent < 75 %>
-        <tr id="yellow">
-      <% else %>
-        <tr id="red">
-      <% end %>
+      <tr>
     <% end %>
-      <td><%= main.sku %></td>
-      <td><%= main.description %></td>
-      <td><%= main.uom %></td>
-      <% if !main.harvest %>
-        <td><%= main.forecast - (main.shipped + main.ordered) + main.adjustment %></td>
-      <% else %>
-        <td><%= main.harvest - (main.shipped + main.ordered) + main.adjustment %></td>
-      <% end %>
+  <% end %>
+    <td><%= main.sku %></td>
+    <td><%= main.description %></td>
+    <td><%= main.uom %></td>
+    <td><%= to_sell %></td>
     </tr>
   <% end %>
   </tbody>

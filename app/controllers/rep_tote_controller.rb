@@ -24,8 +24,15 @@ class RepToteController < ApplicationController
   end
 
   def set_variables (channel, cost_center)
-    @main = Holidaybird.where(channel: channel, cc: cost_center).all
-    @main = @main.sort_by &:sku
+    main = Holidaybird.where(channel: channel, cc: cost_center).all
+    @main = []
+    # main.each do |m|
+    #   if m.forecast != 0 || m.harvest != 0
+    #     @main.push(m)
+    #   end
+    # end
+    # @main = @main.sort_by &:sku
+    @main = main.sort_by &:sku
     @date = get_db_timestamp
   end
 

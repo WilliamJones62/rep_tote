@@ -28,6 +28,6 @@ production:
   <<: *default
   adapter: sqlserver
   database: e21prod
-  host: sqlserver01
+  dataserver: 10.0.0.215
   username: intranet
   password: Duck600it

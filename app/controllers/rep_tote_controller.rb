@@ -23,6 +23,10 @@ class RepToteController < ApplicationController
     set_variables 'FS', 'TX'
   end
 
+  def fsco
+    set_variables 'FS', 'CO'
+  end
+
   def set_variables (channel, cost_center)
     main = Holidaybird.where(channel: channel, cc: cost_center).all
     @main = []

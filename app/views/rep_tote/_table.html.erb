@@ -10,29 +10,31 @@
   </thead>
 
   <tbody>
-  <% @main.each do |main| %>
-  <% sold = (main.shipped + main.ordered - main.adjustment)%>
+  <% if !@main.blank? %>
+    <% @main.each do |main| %>
+    <% sold = (main.shipped + main.ordered - main.adjustment)%>
 
-  <% if !main.harvest || @forecast_value %>
-    <% to_sell = main.forecast - sold %>
-    <% if to_sell <= 0 %></td>
-      <tr id="red">
+    <% if !main.harvest || @forecast_value %>
+      <% to_sell = main.forecast - sold %>
+      <% if to_sell <= 0 %></td>
+        <tr id="red">
+      <% else %>
+        <tr>
+      <% end %>
     <% else %>
-      <tr>
+      <% to_sell = main.harvest - sold %>
+      <% if to_sell <= 0 %></td>
+        <tr id="red">
+      <% else %>
+        <tr>
+      <% end %>
     <% end %>
-  <% else %>
-    <% to_sell = main.harvest - sold %>
-    <% if to_sell <= 0 %></td>
-      <tr id="red">
-    <% else %>
-      <tr>
+      <td><%= main.sku %></td>
+      <td><%= main.description %></td>
+      <td><%= main.uom %></td>
+      <td><%= to_sell %></td>
+      </tr>
     <% end %>
-  <% end %>
-    <td><%= main.sku %></td>
-    <td><%= main.description %></td>
-    <td><%= main.uom %></td>
-    <td><%= to_sell %></td>
-    </tr>
   <% end %>
   </tbody>
 </table>

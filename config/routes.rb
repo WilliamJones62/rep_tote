@@ -13,5 +13,7 @@ Rails.application.routes.draw do
 
   get 'rep_tote/fsco'
 
+  get 'rep_tote/fs'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

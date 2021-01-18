@@ -7,6 +7,10 @@ class RepToteController < ApplicationController
     set_variables 'RET', 'IL'
   end
 
+  def fs
+    set_variables 'FS', 'ALL'
+  end
+
   def fsnj
     set_variables 'FS', 'NJ'
   end
@@ -28,15 +32,51 @@ class RepToteController < ApplicationController
   end
 
   def set_variables (channel, cost_center)
-    main = Holidaybird.where(channel: channel, cc: cost_center).all
+    if cost_center == 'ALL'
+      main = Holidaybird.where(channel: channel).all
+    else
+      main = Holidaybird.where(channel: channel, cc: cost_center).all
+    end
     @main = []
-    # main.each do |m|
-    #   if m.forecast != 0 || m.harvest != 0
-    #     @main.push(m)
-    #   end
-    # end
-    # @main = @main.sort_by &:sku
-    @main = main.sort_by &:sku
+    if cost_center == 'ALL'
+      sorted = main.sort_by &:sku
+      bird = sorted.first
+      shipped = 0
+      ordered = 0
+      adjustment = 0
+      forecast = 0
+      harvest = 0
+      sorted.each do |s|
+        if s.sku == bird.sku
+          shipped += s.shipped
+          ordered += s.ordered
+          adjustment += s.adjustment
+          forecast += s.forecast
+          harvest += s.harvest
+        else
+          bird.shipped = shipped
+          bird.ordered = ordered
+          bird.adjustment = adjustment
+          bird.forecast = forecast
+          bird.harvest = harvest
+          @main.push(bird)
+          bird = s
+          shipped = s.shipped
+          ordered = s.ordered
+          adjustment = s.adjustment
+          forecast = s.forecast
+          harvest = s.harvest
+        end
+      end
+      bird.shipped = shipped
+      bird.ordered = ordered
+      bird.adjustment = adjustment
+      bird.forecast = forecast
+      bird.harvest = harvest
+      @main.push(bird)
+    else
+      @main = main.sort_by &:sku
+    end
     @date = get_db_timestamp
   end
 
